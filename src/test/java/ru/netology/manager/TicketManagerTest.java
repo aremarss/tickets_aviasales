@@ -3,15 +3,18 @@ package ru.netology.manager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.domain.Ticket;
+import ru.netology.domain.TicketByTimeTravelComparator;
 import ru.netology.repository.TicketRepository;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class TicketManagerTest {
     private final TicketRepository repository = new TicketRepository();
     private final TicketManager manager = new TicketManager(repository);
+    private final Comparator<Ticket> comparator = new TicketByTimeTravelComparator();
 
     private final Ticket firstTicket = new Ticket(1, 6448, "MOW", "KZN", 95);
     private final Ticket secondTicket = new Ticket(2, 6853, "MOW", "KZN", 105);
@@ -39,27 +42,27 @@ class TicketManagerTest {
     }
 
     @Test
+    void shouldFindAndSortByTimeTravelMOWToKZNTickets() {
+        Ticket[] expected = new Ticket[]{fourthTicket, firstTicket, thirdTicket, secondTicket};
+        Ticket[] actual = manager.getAll("MOW", "KZN", comparator);
+
+        Arrays.sort(actual, comparator);
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void shouldFindAndSortByTimeTravelMOWToLEDTickets(){
+        Ticket[] expected = new Ticket[]{fifthTicket, seventhTicket, ninthTicket, sixthTicket, eighthTicket};
+        Ticket[] actual = manager.getAll("MOW", "LED", comparator);
+
+        Arrays.sort(actual, comparator);
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
     void shouldSortChosenTickets(){
         Ticket[] expected = new Ticket[]{fifthTicket, ninthTicket, firstTicket, fourthTicket};
         Ticket[] actual = new Ticket[]{firstTicket, fourthTicket, fifthTicket, ninthTicket};
-
-        Arrays.sort(actual);
-        assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    void shouldFindAndSortMOWToKZNTickets() {
-        Ticket[] expected = new Ticket[]{firstTicket, thirdTicket, secondTicket, fourthTicket};
-        Ticket[] actual = manager.getAll("MOW", "KZN");
-
-        Arrays.sort(actual);
-        assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    void shouldFindAndSortMOWToLEDTickets(){
-        Ticket[] expected = new Ticket[]{fifthTicket, sixthTicket, seventhTicket, ninthTicket, eighthTicket};
-        Ticket[] actual = manager.getAll("MOW", "LED");
 
         Arrays.sort(actual);
         assertArrayEquals(expected, actual);

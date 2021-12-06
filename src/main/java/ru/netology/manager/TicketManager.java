@@ -3,6 +3,8 @@ package ru.netology.manager;
 import ru.netology.domain.Ticket;
 import ru.netology.repository.TicketRepository;
 
+import java.util.Comparator;
+
 public class TicketManager {
     TicketRepository repository;
 
@@ -14,7 +16,7 @@ public class TicketManager {
         repository.save(item);
     }
 
-    public Ticket[] getAll(String from, String to) {
+    public Ticket[] getAll(String from, String to, Comparator<Ticket> comparator) {
         Ticket[] result = new Ticket[0];
         for (Ticket ticket : repository.findAll()){
             if (ticket.getDepartureAirport().equals(from) && ticket.getArrivalAirport().equals(to)){
