@@ -23,8 +23,6 @@ class TicketManagerTest {
     private final Ticket eighthTicket = new Ticket(8, 3542, "MOW", "LED", 100);
     private final Ticket ninthTicket = new Ticket(9, 3498, "MOW", "LED", 90);
 
-
-
     @BeforeEach
     void add(){
         manager.add(firstTicket);
