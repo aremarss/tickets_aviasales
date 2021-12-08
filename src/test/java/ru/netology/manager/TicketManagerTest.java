@@ -52,7 +52,6 @@ class TicketManagerTest {
         Ticket[] expected = new Ticket[]{firstTicket, thirdTicket, secondTicket, fourthTicket};
         Ticket[] actual = manager.getAll("MOW", "KZN");
 
-        Arrays.sort(actual);
         assertArrayEquals(expected, actual);
     }
 
@@ -61,7 +60,6 @@ class TicketManagerTest {
         Ticket[] expected = new Ticket[]{fifthTicket, sixthTicket, seventhTicket, ninthTicket, eighthTicket};
         Ticket[] actual = manager.getAll("MOW", "LED");
 
-        Arrays.sort(actual);
         assertArrayEquals(expected, actual);
     }
 
@@ -70,7 +68,6 @@ class TicketManagerTest {
         Ticket[] expected = new Ticket[]{fifthTicket, sixthTicket, seventhTicket, ninthTicket, eighthTicket, firstTicket, thirdTicket, secondTicket, fourthTicket};
         Ticket[] actual = manager.searchBy("MOW");
 
-        Arrays.sort(actual);
         assertArrayEquals(expected, actual);
     }
 
@@ -79,7 +76,6 @@ class TicketManagerTest {
         Ticket[] expected = new Ticket[]{fifthTicket, sixthTicket, seventhTicket, ninthTicket, eighthTicket};
         Ticket[] actual = manager.searchBy("LED");
 
-        Arrays.sort(actual);
         assertArrayEquals(expected, actual);
     }
 
@@ -88,7 +84,6 @@ class TicketManagerTest {
         Ticket[] expected = new Ticket[0];
         Ticket[] actual = manager.searchBy("Someone");
 
-        Arrays.sort(actual);
         assertArrayEquals(expected, actual);
     }
 }
