@@ -1,11 +1,14 @@
 package ru.netology.manager;
 
 import ru.netology.domain.Ticket;
+import ru.netology.domain.TicketByTimeTravelComparator;
 import ru.netology.repository.TicketRepository;
 
+import java.util.Arrays;
 import java.util.Comparator;
 
 public class TicketManager {
+    private final Comparator<Ticket> comparator = new TicketByTimeTravelComparator();
     TicketRepository repository;
 
     public TicketManager(TicketRepository repository) {
@@ -26,6 +29,7 @@ public class TicketManager {
                 result = tmp;
             }
         }
+        Arrays.sort(result, comparator);
         return result;
     }
 
@@ -39,6 +43,7 @@ public class TicketManager {
                 result = tmp;
             }
         }
+        Arrays.sort(result, comparator);
         return result;
     }
 }

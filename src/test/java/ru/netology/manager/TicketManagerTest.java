@@ -46,7 +46,6 @@ class TicketManagerTest {
         Ticket[] expected = new Ticket[]{fourthTicket, firstTicket, thirdTicket, secondTicket};
         Ticket[] actual = manager.getAll("MOW", "KZN", comparator);
 
-        Arrays.sort(actual, comparator);
         assertArrayEquals(expected, actual);
     }
 
@@ -55,34 +54,14 @@ class TicketManagerTest {
         Ticket[] expected = new Ticket[]{fifthTicket, seventhTicket, ninthTicket, sixthTicket, eighthTicket};
         Ticket[] actual = manager.getAll("MOW", "LED", comparator);
 
-        Arrays.sort(actual, comparator);
         assertArrayEquals(expected, actual);
     }
 
     @Test
-    void shouldSortChosenTickets(){
-        Ticket[] expected = new Ticket[]{fifthTicket, ninthTicket, firstTicket, fourthTicket};
-        Ticket[] actual = new Ticket[]{firstTicket, fourthTicket, fifthTicket, ninthTicket};
+    void shouldNotFoundFromKZNToLED(){
+        Ticket[] expected = new Ticket[0];
+        Ticket[] actual = manager.getAll("KZN", "LED", comparator);
 
-        Arrays.sort(actual);
-        assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    void shouldFindAndSortByDepartureAirport(){
-        Ticket[] expected = new Ticket[]{fifthTicket, sixthTicket, seventhTicket, ninthTicket, eighthTicket, firstTicket, thirdTicket, secondTicket, fourthTicket};
-        Ticket[] actual = manager.searchBy("MOW");
-
-        Arrays.sort(actual);
-        assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    void shouldFindAndSortByArrivalAirport(){
-        Ticket[] expected = new Ticket[]{fifthTicket, sixthTicket, seventhTicket, ninthTicket, eighthTicket};
-        Ticket[] actual = manager.searchBy("LED");
-
-        Arrays.sort(actual);
         assertArrayEquals(expected, actual);
     }
 
@@ -91,7 +70,6 @@ class TicketManagerTest {
         Ticket[] expected = new Ticket[0];
         Ticket[] actual = manager.searchBy("Someone");
 
-        Arrays.sort(actual);
         assertArrayEquals(expected, actual);
     }
 }
